@@ -8,16 +8,19 @@ import java.util.ArrayList;
 import java.util.List;
 
 @Entity
-@Table(name = "Generos")
+@Table(name = "Characters")
 @Getter
 @Setter
-public class GenerosModel {
+public class CharactersModel {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(unique = true, nullable = false)
     private Long id;
-    private String nombre;
-    private String imagen;
-    @ManyToMany(mappedBy = "generos", cascade = CascadeType.ALL)
-    private List<PeliculasModel> peliculas = new ArrayList<>();
+    private String name;
+    private String image;
+    private Short age;
+    private Float weight;
+    private String history;
+    @ManyToMany(mappedBy = "characters", cascade = CascadeType.ALL)
+    private List<MoviesModel> movies = new ArrayList<>();
 }
