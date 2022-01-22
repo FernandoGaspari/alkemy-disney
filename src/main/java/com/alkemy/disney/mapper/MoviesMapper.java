@@ -1,6 +1,7 @@
 package com.alkemy.disney.mapper;
 
 import com.alkemy.disney.dto.MoviesDTO;
+import com.alkemy.disney.dto.MoviesSimplDTO;
 import com.alkemy.disney.models.MoviesModel;
 import org.springframework.stereotype.Component;
 
@@ -25,12 +26,29 @@ public class MoviesMapper {
         dto.setTitle(moviesModel.getTitle());
         dto.setCreationDate(moviesModel.getCreationDate());
         dto.setQualification(moviesModel.getQuealification());
+        dto.setCharacters(moviesModel.getCharacters());
         return dto;
     }
     public List<MoviesDTO>moviesModelListtoDTOList(List<MoviesModel> models){
         List<MoviesDTO> dtos = new ArrayList<>();
         for (MoviesModel model:models) {
             dtos.add(moviesModeltoDTO(model));
+        }
+        return dtos;
+    }
+
+    public MoviesSimplDTO moviesModelSimpltoDTO(MoviesModel moviesModel){
+        MoviesSimplDTO dto = new MoviesSimplDTO();
+        dto.setImage(moviesModel.getImage());
+        dto.setTitle(moviesModel.getTitle());
+        dto.setCreationDate(moviesModel.getCreationDate());
+        return dto;
+    }
+
+    public List<MoviesSimplDTO> moviesModelListtoDTOSimplList(List<MoviesModel> models){
+        List<MoviesSimplDTO> dtos = new ArrayList<>();
+        for (MoviesModel model:models) {
+            dtos.add(moviesModelSimpltoDTO(model));
         }
         return dtos;
     }

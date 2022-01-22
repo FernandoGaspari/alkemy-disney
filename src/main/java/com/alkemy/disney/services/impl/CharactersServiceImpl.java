@@ -2,8 +2,10 @@ package com.alkemy.disney.services.impl;
 
 import com.alkemy.disney.dto.CharactersDTO;
 import com.alkemy.disney.dto.CharactersSimplDTO;
+import com.alkemy.disney.dto.MoviesDTO;
 import com.alkemy.disney.mapper.CharactersMapper;
 import com.alkemy.disney.models.CharactersModel;
+import com.alkemy.disney.models.MoviesModel;
 import com.alkemy.disney.repositories.CharactersRepository;
 import com.alkemy.disney.services.CharactersService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -18,9 +20,13 @@ public class CharactersServiceImpl implements CharactersService {
     @Autowired
     private CharactersRepository charactersRepository;
     public CharactersDTO addCharacter(CharactersDTO dto){
+        System.out.println("en service");
         CharactersModel charactersModel = charactersMapper.charactersDTOtoModel(dto);
+        System.out.println("conversion a model");
         CharactersModel addedCharacterModel = charactersRepository.save(charactersModel);
+        System.out.println("guardado listo");
         CharactersDTO result = charactersMapper.charactersModeltoDTO(addedCharacterModel);
+        System.out.println("conversion a dto");
         return result;
     }
     public List<CharactersDTO> getAllCharacters() {
@@ -33,6 +39,23 @@ public class CharactersServiceImpl implements CharactersService {
         List<CharactersModel> models = charactersRepository.findAll();
         List<CharactersSimplDTO> result = charactersMapper.charactersModelListtoDTOSimplList(models);
         return result;
+    }
+
+    public CharactersDTO updateCharacter(Long id, CharactersDTO dto){
+        CharactersModel charactersModel=charactersRepository.getById(id);
+        charactersModel.setName(dto.getName());
+        charactersModel.setImage(dto.getImage());
+        charactersModel.setAge(dto.getAge());
+        charactersModel.setWeight(dto.getWeight());
+        charactersModel.setHistory(dto.getHistory());
+        charactersModel=charactersRepository.save(charactersModel);
+        CharactersDTO results = charactersMapper.charactersModeltoDTO(charactersModel);
+        return results;
+
+    }
+
+    public void deleteCharacter(Long id) {
+        this.charactersRepository.deleteById(id);
     }
 
 }

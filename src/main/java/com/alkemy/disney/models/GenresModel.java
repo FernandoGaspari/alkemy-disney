@@ -1,5 +1,6 @@
 package com.alkemy.disney.models;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
 import lombok.Getter;
 import lombok.Setter;
 

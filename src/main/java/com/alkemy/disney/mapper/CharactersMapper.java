@@ -28,14 +28,10 @@ public class CharactersMapper {
         dto.setAge(charactersModel.getAge());
         dto.setWeight(charactersModel.getWeight());
         dto.setHistory(charactersModel.getHistory());
+        dto.setMovies(charactersModel.getMovies());
         return dto;
     }
-    public CharactersSimplDTO charactersModelSimpltoDTO(CharactersModel charactersModel){
-        CharactersSimplDTO dto = new CharactersSimplDTO();
-        dto.setImage(charactersModel.getImage());
-        dto.setName(charactersModel.getName());
-        return dto;
-    }
+
     public List<CharactersDTO> charactersModelListtoDTOList(List<CharactersModel> models){
         List<CharactersDTO> dtos = new ArrayList<>();
         for (CharactersModel model:models) {
@@ -43,6 +39,14 @@ public class CharactersMapper {
         }
         return dtos;
     }
+
+    public CharactersSimplDTO charactersModelSimpltoDTO(CharactersModel charactersModel){
+        CharactersSimplDTO dto = new CharactersSimplDTO();
+        dto.setImage(charactersModel.getImage());
+        dto.setName(charactersModel.getName());
+        return dto;
+    }
+
     public List<CharactersSimplDTO> charactersModelListtoDTOSimplList(List<CharactersModel> models){
         List<CharactersSimplDTO> dtos = new ArrayList<>();
         for (CharactersModel model:models) {

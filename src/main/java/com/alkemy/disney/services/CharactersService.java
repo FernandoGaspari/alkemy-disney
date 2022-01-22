@@ -9,4 +9,7 @@ public interface CharactersService {
     CharactersDTO addCharacter(CharactersDTO character);
     List<CharactersDTO> getAllCharacters();
     List<CharactersSimplDTO> getAllCharactersSimpl();
+    void deleteCharacter(Long id);
+
+    CharactersDTO updateCharacter(Long id, CharactersDTO character);
 }

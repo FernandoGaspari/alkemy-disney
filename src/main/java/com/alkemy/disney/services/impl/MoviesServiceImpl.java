@@ -1,5 +1,8 @@
 package com.alkemy.disney.services.impl;
 
+import com.alkemy.disney.dto.CharactersSimplDTO;
+import com.alkemy.disney.dto.MoviesSimplDTO;
+import com.alkemy.disney.models.CharactersModel;
 import com.alkemy.disney.repositories.MoviesRepository;
 import com.alkemy.disney.services.MoviesService;
 import com.alkemy.disney.dto.MoviesDTO;
@@ -27,5 +30,24 @@ public class MoviesServiceImpl implements MoviesService {
         List<MoviesModel> models = moviesRepository.findAll();
         List<MoviesDTO> result = moviesMapper.moviesModelListtoDTOList(models);
         return result;
+    }
+    public List<MoviesSimplDTO> getAllMoviesSimpl() {
+        List<MoviesModel> models = moviesRepository.findAll();
+        List<MoviesSimplDTO> result = moviesMapper.moviesModelListtoDTOSimplList(models);
+        return result;
+    }
+    public MoviesDTO updateMovie(Long id, MoviesDTO dto){
+        MoviesModel moviesModel=moviesRepository.getById(id);
+        moviesModel.setTitle(dto.getTitle());
+        moviesModel.setImage(dto.getImage());
+        moviesModel.setCreationDate(dto.getCreationDate());
+        moviesModel.setQuealification(dto.getQualification());
+        moviesModel=moviesRepository.save(moviesModel);
+        MoviesDTO results = moviesMapper.moviesModeltoDTO(moviesModel);
+        return results;
+
+    }
+    public void deleteMovie(Long id){
+        this.moviesRepository.deleteById(id);
     }
 }
