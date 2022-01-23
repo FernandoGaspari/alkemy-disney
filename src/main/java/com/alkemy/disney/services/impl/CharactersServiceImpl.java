@@ -1,17 +1,20 @@
 package com.alkemy.disney.services.impl;
 
 import com.alkemy.disney.dto.CharactersDTO;
+import com.alkemy.disney.dto.CharactersFilterDTO;
 import com.alkemy.disney.dto.CharactersSimplDTO;
 import com.alkemy.disney.dto.MoviesDTO;
 import com.alkemy.disney.mapper.CharactersMapper;
 import com.alkemy.disney.models.CharactersModel;
 import com.alkemy.disney.models.MoviesModel;
 import com.alkemy.disney.repositories.CharactersRepository;
+import com.alkemy.disney.repositories.specifications.CharacterSpecification;
 import com.alkemy.disney.services.CharactersService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
+import java.util.Set;
 
 @Service
 public class CharactersServiceImpl implements CharactersService {
@@ -19,6 +22,8 @@ public class CharactersServiceImpl implements CharactersService {
     private CharactersMapper charactersMapper;
     @Autowired
     private CharactersRepository charactersRepository;
+    @Autowired
+    private CharacterSpecification characterSpecification;
     public CharactersDTO addCharacter(CharactersDTO dto){
         System.out.println("en service");
         CharactersModel charactersModel = charactersMapper.charactersDTOtoModel(dto);
@@ -29,9 +34,9 @@ public class CharactersServiceImpl implements CharactersService {
         System.out.println("conversion a dto");
         return result;
     }
-    public List<CharactersDTO> getAllCharacters() {
-        List<CharactersModel> models = charactersRepository.findAll();
-        List<CharactersDTO> result = charactersMapper.charactersModelListtoDTOList(models);
+    public CharactersDTO getAllCharacters(Long id) {
+        CharactersModel models = charactersRepository.getById(id);
+        CharactersDTO result = charactersMapper.charactersModeltoDTO(models);
         return result;
     }
 
@@ -39,6 +44,13 @@ public class CharactersServiceImpl implements CharactersService {
         List<CharactersModel> models = charactersRepository.findAll();
         List<CharactersSimplDTO> result = charactersMapper.charactersModelListtoDTOSimplList(models);
         return result;
+    }
+
+    public List<CharactersDTO>getByFilters(String name, Short age, Set<Long> idMovies){
+        CharactersFilterDTO charactersFilterDTO = new CharactersFilterDTO(name, age, idMovies);
+        List<CharactersModel> charactersModels = charactersRepository.findAll(characterSpecification.getByFilters(charactersFilterDTO));
+        List<CharactersDTO>dtos=charactersMapper.characterModelSettoCharacterDTOList(charactersModels);
+        return dtos;
     }
 
     public CharactersDTO updateCharacter(Long id, CharactersDTO dto){

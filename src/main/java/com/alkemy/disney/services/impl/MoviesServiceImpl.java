@@ -1,17 +1,18 @@
 package com.alkemy.disney.services.impl;
 
-import com.alkemy.disney.dto.CharactersSimplDTO;
-import com.alkemy.disney.dto.MoviesSimplDTO;
+import com.alkemy.disney.dto.*;
 import com.alkemy.disney.models.CharactersModel;
 import com.alkemy.disney.repositories.MoviesRepository;
+import com.alkemy.disney.repositories.specifications.MovieSpecification;
 import com.alkemy.disney.services.MoviesService;
-import com.alkemy.disney.dto.MoviesDTO;
 import com.alkemy.disney.mapper.MoviesMapper;
 import com.alkemy.disney.models.MoviesModel;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.sql.Date;
 import java.util.List;
+import java.util.Set;
 
 @Service
 public class MoviesServiceImpl implements MoviesService {
@@ -19,6 +20,8 @@ public class MoviesServiceImpl implements MoviesService {
     private MoviesMapper moviesMapper;
     @Autowired
     private MoviesRepository moviesRepository;
+    @Autowired
+    private MovieSpecification movieSpecification;
     public MoviesDTO addMovie(MoviesDTO dto){
         MoviesModel moviesModel = moviesMapper.movieDTOtoModel(dto);
         MoviesModel addedMovieModel = moviesRepository.save(moviesModel);
@@ -26,15 +29,21 @@ public class MoviesServiceImpl implements MoviesService {
         return result;
     }
 
-    public List<MoviesDTO> getAllMovies() {
-        List<MoviesModel> models = moviesRepository.findAll();
-        List<MoviesDTO> result = moviesMapper.moviesModelListtoDTOList(models);
+    public MoviesDTO getAllMovies(Long id) {
+        MoviesModel models = moviesRepository.getById(id);
+        MoviesDTO result = moviesMapper.moviesModeltoDTO(models);
         return result;
     }
     public List<MoviesSimplDTO> getAllMoviesSimpl() {
         List<MoviesModel> models = moviesRepository.findAll();
         List<MoviesSimplDTO> result = moviesMapper.moviesModelListtoDTOSimplList(models);
         return result;
+    }
+    public List<MoviesDTO>getByFilters(String title, Date creationDate, Set<Long> genres, String order){
+        MoviesFilterDTO moviesFilterDTO = new MoviesFilterDTO(title, creationDate, genres, order);
+        List<MoviesModel> moviesModels = moviesRepository.findAll(movieSpecification.getByFilters(moviesFilterDTO));
+        List<MoviesDTO>dtos=moviesMapper.movieModelSettoMovieDTOList(moviesModels);
+        return dtos;
     }
     public MoviesDTO updateMovie(Long id, MoviesDTO dto){
         MoviesModel moviesModel=moviesRepository.getById(id);

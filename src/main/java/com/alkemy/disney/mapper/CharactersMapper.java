@@ -6,6 +6,7 @@ import com.alkemy.disney.models.CharactersModel;
 import org.springframework.stereotype.Component;
 
 import java.util.ArrayList;
+import java.util.Collection;
 import java.util.List;
 
 @Component
@@ -54,4 +55,28 @@ public class CharactersMapper {
         }
         return dtos;
     }
+
+    public List<CharactersDTO>characterModelSettoCharacterDTOList(Collection<CharactersModel> models){
+        List<CharactersDTO>dtos=new ArrayList<>();
+        for (CharactersModel model:models){
+            dtos.add(charactersModeltoDTO(model));
+        }
+        return dtos;
+    }
+
+//    public List<CharactersDTO>characterModelSettoCharacterDTOList(Collection<CharactersModel>models){
+  //      List<CharactersDTO> dtos = new ArrayList<>();
+    //    CharactersDTO charactersDTO;
+      //  for (CharactersModel model:models){
+        //    charactersDTO=new CharactersDTO();
+          //  charactersDTO.setId(model.getId());
+            //charactersDTO.setName(model.getName());
+            //charactersDTO.setImage(model.getImage());
+            //charactersDTO.setAge(model.getAge());
+            //charactersDTO.setWeight(model.getWeight());
+            //charactersDTO.setHistory(model.getHistory());
+            //dtos.add(charactersDTO);
+        //}
+        //return dtos;
+    //}
 }

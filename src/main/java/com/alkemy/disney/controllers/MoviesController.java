@@ -8,7 +8,9 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import java.sql.Date;
 import java.util.List;
+import java.util.Set;
 
 @RestController
 @RequestMapping("/movies")
@@ -20,10 +22,19 @@ public class MoviesController {
         List<MoviesSimplDTO> movies = moviesService.getAllMoviesSimpl();
         return ResponseEntity.ok().body(movies);
     }
-    @GetMapping("/details")
-    public ResponseEntity<List<MoviesDTO>> getAll(){
-        List<MoviesDTO> movies = moviesService.getAllMovies();
+    @GetMapping("/{id}")
+    public ResponseEntity<MoviesDTO> getAll(@PathVariable Long id){
+        MoviesDTO movies = moviesService.getAllMovies(id);
         return ResponseEntity.ok().body(movies);
+    }
+    @GetMapping("/filter")
+    public ResponseEntity<List<MoviesDTO>>getByFilters(
+            @RequestParam(required = false) String title,
+            @RequestParam(required = false) Date creationDate,
+            @RequestParam(required = false) Set<Long> genres,
+            @RequestParam(required = false) String order){
+        List<MoviesDTO> movies=moviesService.getByFilters(title, creationDate, genres, order);
+        return ResponseEntity.ok(movies);
     }
     @PostMapping()
     public ResponseEntity<MoviesDTO> addMovie(@RequestBody MoviesDTO movie){

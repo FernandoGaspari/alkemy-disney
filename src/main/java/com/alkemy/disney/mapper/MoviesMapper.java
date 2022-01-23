@@ -1,11 +1,14 @@
 package com.alkemy.disney.mapper;
 
+import com.alkemy.disney.dto.CharactersDTO;
 import com.alkemy.disney.dto.MoviesDTO;
 import com.alkemy.disney.dto.MoviesSimplDTO;
+import com.alkemy.disney.models.CharactersModel;
 import com.alkemy.disney.models.MoviesModel;
 import org.springframework.stereotype.Component;
 
 import java.util.ArrayList;
+import java.util.Collection;
 import java.util.List;
 
 @Component
@@ -32,6 +35,14 @@ public class MoviesMapper {
     public List<MoviesDTO>moviesModelListtoDTOList(List<MoviesModel> models){
         List<MoviesDTO> dtos = new ArrayList<>();
         for (MoviesModel model:models) {
+            dtos.add(moviesModeltoDTO(model));
+        }
+        return dtos;
+    }
+
+    public List<MoviesDTO>movieModelSettoMovieDTOList(Collection<MoviesModel> models){
+        List<MoviesDTO>dtos=new ArrayList<>();
+        for (MoviesModel model:models){
             dtos.add(moviesModeltoDTO(model));
         }
         return dtos;

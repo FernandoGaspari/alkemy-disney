@@ -10,6 +10,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
+import java.util.Set;
 
 @RestController
 @RequestMapping("/characters")
@@ -23,10 +24,19 @@ public class CharactersController {
         return ResponseEntity.ok().body(characters);
     }
 
-    @GetMapping("/details")
-    public ResponseEntity<List<CharactersDTO>> getAll(){
-        List<CharactersDTO> characters = charactersService.getAllCharacters();
+    @GetMapping("/{id}")
+    public ResponseEntity<CharactersDTO> getAll(@PathVariable Long id){
+        CharactersDTO characters = charactersService.getAllCharacters(id);
         return ResponseEntity.ok().body(characters);
+    }
+
+    @GetMapping("/filter")
+    public ResponseEntity<List<CharactersDTO>>getByFilters(
+            @RequestParam(required = false) String name,
+            @RequestParam(required = false) Short age,
+            @RequestParam(required = false) Set<Long> idMovies){
+        List<CharactersDTO> characters=charactersService.getByFilters(name, age, idMovies);
+        return ResponseEntity.ok(characters);
     }
 
     @PostMapping()
