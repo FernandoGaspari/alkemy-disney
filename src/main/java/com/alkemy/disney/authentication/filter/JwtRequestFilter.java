@@ -22,7 +22,6 @@ public class JwtRequestFilter extends OncePerRequestFilter {
     private UserDetailsCustomService userDetailsCustomService;
     @Autowired
     private JwtUtils jwtUtil;
-
     @Override
     protected void doFilterInternal(HttpServletRequest request, HttpServletResponse response, FilterChain chain) throws ServletException, IOException {
         final String authorizationHeader = request.getHeader("Authorization");
