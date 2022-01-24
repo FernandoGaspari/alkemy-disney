@@ -7,14 +7,16 @@ import com.sendgrid.SendGrid;
 import com.sendgrid.helpers.mail.Mail;
 import com.sendgrid.helpers.mail.objects.Content;
 import com.sendgrid.helpers.mail.objects.Email;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
-
-import java.io.IOException;
 
 @Service
 public class EmailService {
-    
-    private final String mail = "dev.gaspari.fernando@gmail.com";
+    @Value("${app.sendgrid.key}")
+    private String appKey;
+
+    @Value("${mailSender}")
+    private String mail;
 
     public void sendWelcome(String username) {
 
