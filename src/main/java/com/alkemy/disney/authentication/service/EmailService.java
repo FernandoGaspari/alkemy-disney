@@ -13,7 +13,7 @@ import java.io.IOException;
 
 @Service
 public class EmailService {
-    private final String appKey = "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";
+    //private final String appKey = "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";
     private final String mail = "dev.gaspari.fernando@gmail.com";
 
     public void sendWelcome(String username) {
