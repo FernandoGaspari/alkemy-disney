@@ -37,11 +37,9 @@ public class MoviesServiceImpl implements MoviesService {
         List<MoviesSimplDTO> result = moviesMapper.moviesModelListtoDTOSimplList(models);
         return result;
     }
-    public List<MoviesDTO>getByFilters(String title, Set<Long> genres, String order){
-        System.out.println(genres);
-        //System.out.println(order);
-        List<MoviesModel> moviesModels = moviesRepository.findAll(movieSpecification.getByFilters(title, genres, order));
-        List<MoviesDTO>dtos=moviesMapper.movieModelSettoMovieDTOList(moviesModels);
+    public List<MoviesDetailsDTO> getByFilters(String title, String order, Set<Long> genre){
+        List<MoviesModel> moviesModels = moviesRepository.findAll(movieSpecification.getByFilters(title, order, genre));
+        List<MoviesDetailsDTO>dtos=moviesMapper.moviesModeltoListMoviesDetailsDTO(moviesModels);
         return dtos;
     }
     public MoviesDTO updateMovie(Long id, MoviesDTO dto){

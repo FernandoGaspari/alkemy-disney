@@ -29,12 +29,12 @@ public class MoviesController {
         return ResponseEntity.ok().body(movies);
     }
     @GetMapping("/filter")
-    public ResponseEntity<List<MoviesDTO>>getByFilters(
-            @RequestParam(required = false) String title,
-            @RequestParam(required = false) Set<Long> genres,
-            @RequestParam(required = false, defaultValue = "ASC") String order){
-        System.out.println(order);
-        List<MoviesDTO> movies=moviesService.getByFilters(title, genres, order);
+    public ResponseEntity<List<MoviesDetailsDTO>>getByFilters(
+            @RequestParam(required = false) String name,
+            @RequestParam(required = false, defaultValue = "ASC") String order,
+            @RequestParam(required = false) Set<Long> genre){
+        System.out.println(genre);
+        List<MoviesDetailsDTO> movies=moviesService.getByFilters(name, order, genre);
 
         return ResponseEntity.ok(movies);
     }

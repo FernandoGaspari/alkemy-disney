@@ -17,7 +17,7 @@ import java.util.Set;
 
 @Component
 public class MovieSpecification {
-        public Specification<MoviesModel> getByFilters(String title, Set<Long> genres, String order) {
+        public Specification<MoviesModel> getByFilters(String title, String order, Set<Long> genre) {
             return (root, query, criteriaBuilder) -> {
                 List<Predicate> predicates = new ArrayList<>();
                 if (StringUtils.hasLength(title)) {
@@ -26,12 +26,12 @@ public class MovieSpecification {
                             "%" + title.toLowerCase() + "%"));
                 }
 
-                if (!CollectionUtils.isEmpty(genres)){
-                    System.out.println("movies!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!");
+                if (!CollectionUtils.isEmpty(genre)){
+                    System.out.println("genres!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!");
                     Join<GenresModel, MoviesModel> join= root.join("genres", JoinType.INNER);
                     Expression<String> idGenre=join.get("id");
 
-                    predicates.add(idGenre.in(genres));
+                    predicates.add(idGenre.in(genre));
                 }
                 query.distinct(true);
 

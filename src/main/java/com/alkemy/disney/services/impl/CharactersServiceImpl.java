@@ -44,8 +44,8 @@ public class CharactersServiceImpl implements CharactersService {
         return result;
     }
 
-    public List<CharactersDetailsDTO>getByFilters(String name, Short age, Set<Long> idMovies){
-        List<CharactersModel> charactersModels = charactersRepository.findAll(characterSpecification.getByFilters(name, age, idMovies));
+    public List<CharactersDetailsDTO> getByFilters(String name, Short age, Set<Long> movies){
+        List<CharactersModel> charactersModels = charactersRepository.findAll(characterSpecification.getByFilters(name, age, movies));
         List<CharactersDetailsDTO>dtos=charactersMapper.charactersModeltoListCharactersDetailsDTO(charactersModels);
         return dtos;
     }

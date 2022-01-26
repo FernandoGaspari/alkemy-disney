@@ -80,4 +80,11 @@ public class CharactersMapper {
         return dtos;
     }
 
+    public List<CharactersDetailsDTO> charactersModeltoListCharactersDetailsDTO(List<CharactersModel> models) {
+        List<CharactersDetailsDTO> dtos = new ArrayList<>();
+        for (CharactersModel model:models) {
+            dtos.add(charactersModeltoCharactersDetailsDTO(model));
+        }
+        return dtos;
+    }
 }
