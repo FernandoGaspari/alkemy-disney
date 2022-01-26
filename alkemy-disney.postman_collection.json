@@ -39,6 +39,17 @@
 				},
 				{
 					"name": "Inicio de Sesión",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"postman.setEnvironmentVariable(\"jwt\",  JSON.parse(responseBody).jwt);"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
 					"request": {
 						"method": "POST",
 						"header": [],
@@ -74,13 +85,23 @@
 				{
 					"name": "Listado de Personajes",
 					"request": {
+						"auth": {
+							"type": "apikey",
+							"apikey": [
+								{
+									"key": "key",
+									"value": "Authorization",
+									"type": "string"
+								},
+								{
+									"key": "value",
+									"value": "Bearer {{jwt}}",
+									"type": "string"
+								}
+							]
+						},
 						"method": "GET",
 						"header": [
-							{
-								"key": "Authorization",
-								"value": "",
-								"type": "text"
-							},
 							{
 								"key": "",
 								"value": "",
@@ -105,14 +126,23 @@
 				{
 					"name": "Listado de Personajes Detallado",
 					"request": {
+						"auth": {
+							"type": "apikey",
+							"apikey": [
+								{
+									"key": "key",
+									"value": "Authorization",
+									"type": "string"
+								},
+								{
+									"key": "value",
+									"value": "Bearer {{jwt}}",
+									"type": "string"
+								}
+							]
+						},
 						"method": "GET",
-						"header": [
-							{
-								"key": "Authorization",
-								"value": "",
-								"type": "text"
-							}
-						],
+						"header": [],
 						"url": {
 							"raw": "http://localhost:8080/characters/6",
 							"protocol": "http",
@@ -131,14 +161,23 @@
 				{
 					"name": "CRUD Creación de Personaje",
 					"request": {
+						"auth": {
+							"type": "apikey",
+							"apikey": [
+								{
+									"key": "key",
+									"value": "Authorization",
+									"type": "string"
+								},
+								{
+									"key": "value",
+									"value": "Bearer {{jwt}}",
+									"type": "string"
+								}
+							]
+						},
 						"method": "POST",
-						"header": [
-							{
-								"key": "Authorization",
-								"value": "",
-								"type": "text"
-							}
-						],
+						"header": [],
 						"body": {
 							"mode": "raw",
 							"raw": "{\r\n    \"name\":\"Elsa\",\r\n    \"image\":\"elsa.jpg\",\r\n    \"age\":\"19\",\r\n    \"weight\":\"60\",\r\n    \"history\":\"Lorem\"\r\n}",
@@ -165,14 +204,23 @@
 				{
 					"name": "CRUD Modificación de Personaje",
 					"request": {
+						"auth": {
+							"type": "apikey",
+							"apikey": [
+								{
+									"key": "key",
+									"value": "Authorization",
+									"type": "string"
+								},
+								{
+									"key": "value",
+									"value": "Bearer {{jwt}}",
+									"type": "string"
+								}
+							]
+						},
 						"method": "PUT",
-						"header": [
-							{
-								"key": "Authorization",
-								"value": "",
-								"type": "text"
-							}
-						],
+						"header": [],
 						"body": {
 							"mode": "raw",
 							"raw": "{\r\n    \"name\":\"Anna\",\r\n    \"image\":\"Anna.jpg\",\r\n    \"age\":\"16\",\r\n    \"weight\":\"50\",\r\n    \"history\":\"Lorem ipsum dolor\"\r\n}",
@@ -200,14 +248,23 @@
 				{
 					"name": "CRUD Eliminación de Personaje",
 					"request": {
+						"auth": {
+							"type": "apikey",
+							"apikey": [
+								{
+									"key": "key",
+									"value": "Authorization",
+									"type": "string"
+								},
+								{
+									"key": "value",
+									"value": "Bearer {{jwt}}",
+									"type": "string"
+								}
+							]
+						},
 						"method": "DELETE",
-						"header": [
-							{
-								"key": "Authorization",
-								"value": "",
-								"type": "text"
-							}
-						],
+						"header": [],
 						"url": {
 							"raw": "http://localhost:8080/characters/10",
 							"protocol": "http",
@@ -226,16 +283,25 @@
 				{
 					"name": "Búsqueda de Personajes",
 					"request": {
+						"auth": {
+							"type": "apikey",
+							"apikey": [
+								{
+									"key": "key",
+									"value": "Authorization",
+									"type": "string"
+								},
+								{
+									"key": "value",
+									"value": "Bearer {{jwt}}",
+									"type": "string"
+								}
+							]
+						},
 						"method": "GET",
-						"header": [
-							{
-								"key": "Authorization",
-								"value": "",
-								"type": "text"
-							}
-						],
+						"header": [],
 						"url": {
-							"raw": "http://localhost:8080/characters/filter?age=19",
+							"raw": "http://localhost:8080/characters/filter?name=Bella",
 							"protocol": "http",
 							"host": [
 								"localhost"
@@ -248,16 +314,16 @@
 							"query": [
 								{
 									"key": "name",
-									"value": "Elsa",
-									"disabled": true
+									"value": "Bella"
 								},
 								{
 									"key": "age",
-									"value": "19"
+									"value": "16",
+									"disabled": true
 								},
 								{
 									"key": "movies",
-									"value": "12",
+									"value": "",
 									"disabled": true
 								}
 							]
@@ -273,14 +339,23 @@
 				{
 					"name": "Listado de Películas",
 					"request": {
+						"auth": {
+							"type": "apikey",
+							"apikey": [
+								{
+									"key": "key",
+									"value": "Authorization",
+									"type": "string"
+								},
+								{
+									"key": "value",
+									"value": "Bearer {{jwt}}",
+									"type": "string"
+								}
+							]
+						},
 						"method": "GET",
-						"header": [
-							{
-								"key": "Authorization",
-								"value": "",
-								"type": "text"
-							}
-						],
+						"header": [],
 						"url": {
 							"raw": "http://localhost:8080/movies",
 							"protocol": "http",
@@ -298,14 +373,23 @@
 				{
 					"name": "Listado de Películas Detallada",
 					"request": {
+						"auth": {
+							"type": "apikey",
+							"apikey": [
+								{
+									"key": "key",
+									"value": "Authorization",
+									"type": "string"
+								},
+								{
+									"key": "value",
+									"value": "Bearer {{jwt}}",
+									"type": "string"
+								}
+							]
+						},
 						"method": "GET",
-						"header": [
-							{
-								"key": "Authorization",
-								"value": "",
-								"type": "text"
-							}
-						],
+						"header": [],
 						"url": {
 							"raw": "http://localhost:8080/movies/12",
 							"protocol": "http",
@@ -324,14 +408,23 @@
 				{
 					"name": "CRUD Creación de Película",
 					"request": {
+						"auth": {
+							"type": "apikey",
+							"apikey": [
+								{
+									"key": "key",
+									"value": "Authorization",
+									"type": "string"
+								},
+								{
+									"key": "value",
+									"value": "Bearer {{jwt}}",
+									"type": "string"
+								}
+							]
+						},
 						"method": "POST",
-						"header": [
-							{
-								"key": "Authorization",
-								"value": "",
-								"type": "text"
-							}
-						],
+						"header": [],
 						"body": {
 							"mode": "raw",
 							"raw": "{\r\n    \"title\": \"Valiente\",\r\n    \"image\": \"Valiente.jpg\",\r\n    \"creationDate\": \"1991-11-25\",\r\n    \"qualification\": \"4\"\r\n}",
@@ -358,14 +451,23 @@
 				{
 					"name": "CRUD Modificación de Película",
 					"request": {
+						"auth": {
+							"type": "apikey",
+							"apikey": [
+								{
+									"key": "key",
+									"value": "Authorization",
+									"type": "string"
+								},
+								{
+									"key": "value",
+									"value": "Bearer {{jwt}}",
+									"type": "string"
+								}
+							]
+						},
 						"method": "PUT",
-						"header": [
-							{
-								"key": "Authorization",
-								"value": "",
-								"type": "text"
-							}
-						],
+						"header": [],
 						"body": {
 							"mode": "raw",
 							"raw": "{\r\n    \"title\": \"La bella y la Bestia\",\r\n    \"image\": \"bellaybestia.jpg\",\r\n    \"creationDate\": \"1898-02-15\",\r\n    \"qualification\": \"5\"\r\n}",
@@ -393,14 +495,23 @@
 				{
 					"name": "CRUD Eliminación de Película",
 					"request": {
+						"auth": {
+							"type": "apikey",
+							"apikey": [
+								{
+									"key": "key",
+									"value": "Authorization",
+									"type": "string"
+								},
+								{
+									"key": "value",
+									"value": "Bearer {{jwt}}",
+									"type": "string"
+								}
+							]
+						},
 						"method": "DELETE",
-						"header": [
-							{
-								"key": "Authorization",
-								"value": "",
-								"type": "text"
-							}
-						],
+						"header": [],
 						"body": {
 							"mode": "raw",
 							"raw": "{\r\n    \"title\": \"La bella y la bestia\",\r\n    \"image\": \"bellaybestia.jpg\",\r\n    \"creationDate\": \"1898-02-15\",\r\n    \"qualification\": \"5\"\r\n}",
@@ -428,16 +539,25 @@
 				{
 					"name": "Búsqueda de Películas",
 					"request": {
+						"auth": {
+							"type": "apikey",
+							"apikey": [
+								{
+									"key": "key",
+									"value": "Authorization",
+									"type": "string"
+								},
+								{
+									"key": "value",
+									"value": "Bearer {{jwt}}",
+									"type": "string"
+								}
+							]
+						},
 						"method": "GET",
-						"header": [
-							{
-								"key": "Authorization",
-								"value": "",
-								"type": "text"
-							}
-						],
+						"header": [],
 						"url": {
-							"raw": "http://localhost:8080/movies/filter?genre=2&order=DESC",
+							"raw": "http://localhost:8080/movies/filter?name=Bella",
 							"protocol": "http",
 							"host": [
 								"localhost"
@@ -450,16 +570,17 @@
 							"query": [
 								{
 									"key": "name",
-									"value": "Froz",
-									"disabled": true
+									"value": "Bella"
 								},
 								{
 									"key": "genre",
-									"value": "2"
+									"value": "2",
+									"disabled": true
 								},
 								{
 									"key": "order",
-									"value": "DESC"
+									"value": "DESC",
+									"disabled": true
 								}
 							]
 						}
