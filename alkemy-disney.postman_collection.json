@@ -1,0 +1,473 @@
+{
+	"info": {
+		"_postman_id": "2ae16f9d-6761-4936-bdd6-2171f3c81851",
+		"name": "alkemy-disney",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "users",
+			"item": [
+				{
+					"name": "Registro",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"username\":\"unity.matias@outlook.com\",\r\n    \"password\":\"pass1234\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:8080/auth/register",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"auth",
+								"register"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Inicio de Sesión",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"username\":\"dev.gaspari.fernando@gmail.com\",\r\n    \"password\":\"pass1234\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:8080/auth/login",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"auth",
+								"login"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "characters",
+			"item": [
+				{
+					"name": "Listado de Personajes",
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "Bearer eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJkZXYuZ2FzcGFyaS5mZXJuYW5kb0BnbWFpbC5jb20iLCJleHAiOjE2NDMwMjUxNTgsImlhdCI6MTY0Mjk4OTE1OH0.NDwjQT7T9Azv9i0O7Gz-lONQ3GuVdzwZtvM3nvEFSZU",
+								"type": "text"
+							},
+							{
+								"key": "",
+								"value": "",
+								"type": "text",
+								"disabled": true
+							}
+						],
+						"url": {
+							"raw": "http://localhost:8080/characters",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"characters"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Listado de Personajes Detallado",
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "http://localhost:8080/characters/1",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"characters",
+								"1"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "CRUD Creación de Personaje",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"name\":\"Anna\",\r\n    \"image\":\"Anna.jpg\",\r\n    \"age\":\"16\",\r\n    \"weight\":\"50\",\r\n    \"history\":\"Lorem\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:8080/characters",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"characters"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "CRUD Modificación de Personaje",
+					"request": {
+						"method": "PUT",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"name\":\"Anna\",\r\n    \"image\":\"Anna.jpg\",\r\n    \"age\":\"16\",\r\n    \"weight\":\"50\",\r\n    \"history\":\"Lorem ipsum dolor\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:8080/characters/3",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"characters",
+								"3"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "CRUD Eliminación de Personaje",
+					"request": {
+						"method": "DELETE",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "http://localhost:8080/characters/3",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"characters",
+								"3"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Búsqueda de Personajes",
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "Bearer eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJkZXYuZ2FzcGFyaS5mZXJuYW5kb0BnbWFpbC5jb20iLCJleHAiOjE2NDMwMjcxMzgsImlhdCI6MTY0Mjk5MTEzOH0.cKtWh1UdOr8Zu__L1ytioMFjDJAhBFaFfK6z_36Sgw4",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "http://localhost:8080/characters/filter?age=19",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"characters",
+								"filter"
+							],
+							"query": [
+								{
+									"key": "name",
+									"value": "Anna",
+									"disabled": true
+								},
+								{
+									"key": "age",
+									"value": "19"
+								},
+								{
+									"key": "movies",
+									"value": "2",
+									"disabled": true
+								}
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "movies",
+			"item": [
+				{
+					"name": "Listado de Películas",
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "http://localhost:8080/movies",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"movies"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Listado de Películas Detallada",
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "http://localhost:8080/movies/1",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"movies",
+								"1"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "CRUD Creación de Película",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"title\": \"Valiente\",\r\n    \"image\": \"Valiente.jpg\",\r\n    \"creationDate\": \"1991-11-25\",\r\n    \"qualification\": \"4\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:8080/movies",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"movies"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "CRUD Modificación de Película",
+					"request": {
+						"method": "PUT",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"title\": \"La bella y la Bestia\",\r\n    \"image\": \"bellaybestia.jpg\",\r\n    \"creationDate\": \"1898-02-15\",\r\n    \"qualification\": \"5\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:8080/movies/4",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"movies",
+								"4"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "CRUD Eliminación de Película",
+					"request": {
+						"method": "DELETE",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"title\": \"La bella y la bestia\",\r\n    \"image\": \"bellaybestia.jpg\",\r\n    \"creationDate\": \"1898-02-15\",\r\n    \"qualification\": \"5\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:8080/movies/2",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"movies",
+								"2"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Búsqueda de Películas",
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "Bearer eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJkZXYuZ2FzcGFyaS5mZXJuYW5kb0BnbWFpbC5jb20iLCJleHAiOjE2NDMxODI2OTAsImlhdCI6MTY0MzE0NjY5MH0._sswJocBYmngEwhQGF9kAaMyJL9fQ4rvT3NUBswH_Tg",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "http://localhost:8080/movies/filter?title=Frozen",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"movies",
+								"filter"
+							],
+							"query": [
+								{
+									"key": "title",
+									"value": "Frozen"
+								},
+								{
+									"key": "genre",
+									"value": "1",
+									"disabled": true
+								},
+								{
+									"key": "order",
+									"value": "asc",
+									"disabled": true
+								}
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		}
+	]
+}

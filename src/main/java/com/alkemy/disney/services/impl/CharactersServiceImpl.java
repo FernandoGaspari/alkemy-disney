@@ -1,12 +1,10 @@
 package com.alkemy.disney.services.impl;
 
 import com.alkemy.disney.dto.CharactersDTO;
-import com.alkemy.disney.dto.CharactersFilterDTO;
+import com.alkemy.disney.dto.CharactersDetailsDTO;
 import com.alkemy.disney.dto.CharactersSimplDTO;
-import com.alkemy.disney.dto.MoviesDTO;
 import com.alkemy.disney.mapper.CharactersMapper;
 import com.alkemy.disney.models.CharactersModel;
-import com.alkemy.disney.models.MoviesModel;
 import com.alkemy.disney.repositories.CharactersRepository;
 import com.alkemy.disney.repositories.specifications.CharacterSpecification;
 import com.alkemy.disney.services.CharactersService;
@@ -34,9 +32,9 @@ public class CharactersServiceImpl implements CharactersService {
         System.out.println("conversion a dto");
         return result;
     }
-    public CharactersDTO getAllCharacters(Long id) {
+    public CharactersDetailsDTO getAllCharacters(Long id) {
         CharactersModel models = charactersRepository.getById(id);
-        CharactersDTO result = charactersMapper.charactersModeltoDTO(models);
+        CharactersDetailsDTO result = charactersMapper.charactersModeltoCharactersDetailsDTO(models);
         return result;
     }
 
@@ -46,10 +44,9 @@ public class CharactersServiceImpl implements CharactersService {
         return result;
     }
 
-    public List<CharactersDTO>getByFilters(String name, Short age, Set<Long> idMovies){
-        CharactersFilterDTO charactersFilterDTO = new CharactersFilterDTO(name, age, idMovies);
-        List<CharactersModel> charactersModels = charactersRepository.findAll(characterSpecification.getByFilters(charactersFilterDTO));
-        List<CharactersDTO>dtos=charactersMapper.characterModelSettoCharacterDTOList(charactersModels);
+    public List<CharactersDetailsDTO>getByFilters(String name, Short age, Set<Long> idMovies){
+        List<CharactersModel> charactersModels = charactersRepository.findAll(characterSpecification.getByFilters(name, age, idMovies));
+        List<CharactersDetailsDTO>dtos=charactersMapper.charactersModeltoListCharactersDetailsDTO(charactersModels);
         return dtos;
     }
 

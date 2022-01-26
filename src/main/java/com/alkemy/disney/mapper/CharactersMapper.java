@@ -1,13 +1,13 @@
 package com.alkemy.disney.mapper;
 
 import com.alkemy.disney.dto.CharactersDTO;
+import com.alkemy.disney.dto.CharactersDetailsDTO;
 import com.alkemy.disney.dto.CharactersSimplDTO;
 import com.alkemy.disney.models.CharactersModel;
+import com.alkemy.disney.models.MoviesModel;
 import org.springframework.stereotype.Component;
 
-import java.util.ArrayList;
-import java.util.Collection;
-import java.util.List;
+import java.util.*;
 
 @Component
 public class CharactersMapper {
@@ -30,6 +30,22 @@ public class CharactersMapper {
         dto.setWeight(charactersModel.getWeight());
         dto.setHistory(charactersModel.getHistory());
         dto.setMovies(charactersModel.getMovies());
+        return dto;
+    }
+
+    public CharactersDetailsDTO charactersModeltoCharactersDetailsDTO(CharactersModel charactersModel){
+        CharactersDetailsDTO dto = new CharactersDetailsDTO();
+        dto.setId(charactersModel.getId());
+        dto.setImage(charactersModel.getImage());
+        dto.setAge(charactersModel.getAge());
+        dto.setHistory(charactersModel.getHistory());
+        dto.setWeight(charactersModel.getWeight());
+        dto.setName(charactersModel.getName());
+        Set<String> titles = new HashSet<>();
+        for (MoviesModel movie:charactersModel.getMovies()) {
+            titles.add(movie.getTitle());
+        }
+        dto.setMovies(titles);
         return dto;
     }
 
@@ -64,19 +80,4 @@ public class CharactersMapper {
         return dtos;
     }
 
-//    public List<CharactersDTO>characterModelSettoCharacterDTOList(Collection<CharactersModel>models){
-  //      List<CharactersDTO> dtos = new ArrayList<>();
-    //    CharactersDTO charactersDTO;
-      //  for (CharactersModel model:models){
-        //    charactersDTO=new CharactersDTO();
-          //  charactersDTO.setId(model.getId());
-            //charactersDTO.setName(model.getName());
-            //charactersDTO.setImage(model.getImage());
-            //charactersDTO.setAge(model.getAge());
-            //charactersDTO.setWeight(model.getWeight());
-            //charactersDTO.setHistory(model.getHistory());
-            //dtos.add(charactersDTO);
-        //}
-        //return dtos;
-    //}
 }

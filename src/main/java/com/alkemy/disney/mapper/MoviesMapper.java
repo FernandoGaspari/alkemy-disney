@@ -2,14 +2,13 @@ package com.alkemy.disney.mapper;
 
 import com.alkemy.disney.dto.CharactersDTO;
 import com.alkemy.disney.dto.MoviesDTO;
+import com.alkemy.disney.dto.MoviesDetailsDTO;
 import com.alkemy.disney.dto.MoviesSimplDTO;
 import com.alkemy.disney.models.CharactersModel;
 import com.alkemy.disney.models.MoviesModel;
 import org.springframework.stereotype.Component;
 
-import java.util.ArrayList;
-import java.util.Collection;
-import java.util.List;
+import java.util.*;
 
 @Component
 public class MoviesMapper {
@@ -19,7 +18,7 @@ public class MoviesMapper {
         moviesModel.setImage(dto.getImage());
         moviesModel.setTitle(dto.getTitle());
         moviesModel.setCreationDate(dto.getCreationDate());
-        moviesModel.setQuealification(dto.getQualification());
+        moviesModel.setQualification(dto.getQualification());
         return moviesModel;
     }
     public MoviesDTO moviesModeltoDTO(MoviesModel moviesModel){
@@ -28,10 +27,27 @@ public class MoviesMapper {
         dto.setImage(moviesModel.getImage());
         dto.setTitle(moviesModel.getTitle());
         dto.setCreationDate(moviesModel.getCreationDate());
-        dto.setQualification(moviesModel.getQuealification());
+        dto.setQualification(moviesModel.getQualification());
         dto.setCharacters(moviesModel.getCharacters());
         return dto;
     }
+
+    public MoviesDetailsDTO moviesModeltoMoviesDetailDTO(MoviesModel moviesModel){
+        MoviesDetailsDTO dto = new MoviesDetailsDTO();
+        dto.setId(moviesModel.getId());
+        dto.setImage(moviesModel.getImage());
+        dto.setTitle(moviesModel.getTitle());
+        dto.setCreationDate(moviesModel.getCreationDate());
+        dto.setQualification(moviesModel.getQualification());
+        Set<String>names = new HashSet<>();
+        for (CharactersModel character:moviesModel.getCharacters()) {
+            names.add(character.getName());
+        }
+        dto.setCharacters(names);
+        return dto;
+
+    }
+
     public List<MoviesDTO>moviesModelListtoDTOList(List<MoviesModel> models){
         List<MoviesDTO> dtos = new ArrayList<>();
         for (MoviesModel model:models) {

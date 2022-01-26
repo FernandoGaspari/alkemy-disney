@@ -1,6 +1,7 @@
 package com.alkemy.disney.models;
 
 import com.fasterxml.jackson.annotation.JsonBackReference;
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import lombok.Getter;
 import lombok.Setter;
 
@@ -19,6 +20,7 @@ public class GenresModel {
     private Long id;
     private String name;
     private String image;
-    @ManyToMany(mappedBy = "genres", cascade = CascadeType.ALL)
+    @ManyToMany(mappedBy = "genres", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
+    //@JsonIgnoreProperties({"genres"})
     private List<MoviesModel> movies = new ArrayList<>();
 }

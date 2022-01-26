@@ -1,6 +1,7 @@
 package com.alkemy.disney.controllers;
 
 import com.alkemy.disney.dto.CharactersDTO;
+import com.alkemy.disney.dto.CharactersDetailsDTO;
 import com.alkemy.disney.dto.CharactersSimplDTO;
 import com.alkemy.disney.dto.MoviesDTO;
 import com.alkemy.disney.services.CharactersService;
@@ -25,17 +26,17 @@ public class CharactersController {
     }
 
     @GetMapping("/{id}")
-    public ResponseEntity<CharactersDTO> getAll(@PathVariable Long id){
-        CharactersDTO characters = charactersService.getAllCharacters(id);
+    public ResponseEntity<CharactersDetailsDTO> getAll(@PathVariable Long id){
+        CharactersDetailsDTO characters = charactersService.getAllCharacters(id);
         return ResponseEntity.ok().body(characters);
     }
 
     @GetMapping("/filter")
-    public ResponseEntity<List<CharactersDTO>>getByFilters(
+    public ResponseEntity<List<CharactersDetailsDTO>>getByFilters(
             @RequestParam(required = false) String name,
             @RequestParam(required = false) Short age,
-            @RequestParam(required = false) Set<Long> idMovies){
-        List<CharactersDTO> characters=charactersService.getByFilters(name, age, idMovies);
+            @RequestParam(required = false) Set <Long> idMovie){
+        List<CharactersDetailsDTO> characters=charactersService.getByFilters(name, age, idMovie);
         return ResponseEntity.ok(characters);
     }
 

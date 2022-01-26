@@ -1,5 +1,6 @@
 package com.alkemy.disney.controllers;
 
+import com.alkemy.disney.dto.MoviesDetailsDTO;
 import com.alkemy.disney.dto.MoviesSimplDTO;
 import com.alkemy.disney.services.MoviesService;
 import com.alkemy.disney.dto.MoviesDTO;
@@ -23,17 +24,18 @@ public class MoviesController {
         return ResponseEntity.ok().body(movies);
     }
     @GetMapping("/{id}")
-    public ResponseEntity<MoviesDTO> getAll(@PathVariable Long id){
-        MoviesDTO movies = moviesService.getAllMovies(id);
+    public ResponseEntity<MoviesDetailsDTO> getAll(@PathVariable Long id){
+        MoviesDetailsDTO movies = moviesService.getAllMovies(id);
         return ResponseEntity.ok().body(movies);
     }
     @GetMapping("/filter")
     public ResponseEntity<List<MoviesDTO>>getByFilters(
             @RequestParam(required = false) String title,
-            @RequestParam(required = false) Date creationDate,
             @RequestParam(required = false) Set<Long> genres,
-            @RequestParam(required = false) String order){
-        List<MoviesDTO> movies=moviesService.getByFilters(title, creationDate, genres, order);
+            @RequestParam(required = false, defaultValue = "ASC") String order){
+        System.out.println(order);
+        List<MoviesDTO> movies=moviesService.getByFilters(title, genres, order);
+
         return ResponseEntity.ok(movies);
     }
     @PostMapping()

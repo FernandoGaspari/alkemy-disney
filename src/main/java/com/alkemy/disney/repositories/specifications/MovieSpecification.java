@@ -1,6 +1,5 @@
 package com.alkemy.disney.repositories.specifications;
 
-import com.alkemy.disney.dto.MoviesFilterDTO;
 import com.alkemy.disney.models.GenresModel;
 import com.alkemy.disney.models.MoviesModel;
 import org.springframework.data.jpa.domain.Specification;
@@ -14,31 +13,34 @@ import javax.persistence.criteria.JoinType;
 import javax.persistence.criteria.Predicate;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Set;
 
 @Component
 public class MovieSpecification {
-        public Specification<MoviesModel> getByFilters(MoviesFilterDTO filters) {
+        public Specification<MoviesModel> getByFilters(String title, Set<Long> genres, String order) {
             return (root, query, criteriaBuilder) -> {
                 List<Predicate> predicates = new ArrayList<>();
-                if (StringUtils.hasLength(filters.getTitle())) {
+                if (StringUtils.hasLength(title)) {
                     predicates.add(criteriaBuilder.like(
                             criteriaBuilder.lower(root.get("title")),
-                            "%" + filters.getTitle().toLowerCase() + "%"));
+                            "%" + title.toLowerCase() + "%"));
                 }
 
-                if (!CollectionUtils.isEmpty(filters.getGenres())){
+                if (!CollectionUtils.isEmpty(genres)){
+                    System.out.println("movies!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!");
                     Join<GenresModel, MoviesModel> join= root.join("genres", JoinType.INNER);
                     Expression<String> idGenre=join.get("id");
 
-                    predicates.add(idGenre.in(filters.getGenres()));
+                    predicates.add(idGenre.in(genres));
                 }
                 query.distinct(true);
 
+                //System.out.println(order);
                 String orderByCreationDate = "creationDate";
-                query.orderBy(filters.isASC()?
-                        criteriaBuilder.asc(root.get(orderByCreationDate)) :
-                        criteriaBuilder.desc(root.get(orderByCreationDate))
-                        );
+                query.orderBy(
+                        order.equalsIgnoreCase("asc") ?
+                                criteriaBuilder.asc(root.get(orderByCreationDate)) :
+                                criteriaBuilder.desc(root.get(orderByCreationDate)));
 
                 return criteriaBuilder.and(predicates.toArray(new Predicate[0]));
             };

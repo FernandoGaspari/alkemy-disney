@@ -1,7 +1,6 @@
 package com.alkemy.disney.services.impl;
 
 import com.alkemy.disney.dto.*;
-import com.alkemy.disney.models.CharactersModel;
 import com.alkemy.disney.repositories.MoviesRepository;
 import com.alkemy.disney.repositories.specifications.MovieSpecification;
 import com.alkemy.disney.services.MoviesService;
@@ -10,7 +9,6 @@ import com.alkemy.disney.models.MoviesModel;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import java.sql.Date;
 import java.util.List;
 import java.util.Set;
 
@@ -29,9 +27,9 @@ public class MoviesServiceImpl implements MoviesService {
         return result;
     }
 
-    public MoviesDTO getAllMovies(Long id) {
+    public MoviesDetailsDTO getAllMovies(Long id) {
         MoviesModel models = moviesRepository.getById(id);
-        MoviesDTO result = moviesMapper.moviesModeltoDTO(models);
+        MoviesDetailsDTO result = moviesMapper.moviesModeltoMoviesDetailDTO(models);
         return result;
     }
     public List<MoviesSimplDTO> getAllMoviesSimpl() {
@@ -39,9 +37,10 @@ public class MoviesServiceImpl implements MoviesService {
         List<MoviesSimplDTO> result = moviesMapper.moviesModelListtoDTOSimplList(models);
         return result;
     }
-    public List<MoviesDTO>getByFilters(String title, Date creationDate, Set<Long> genres, String order){
-        MoviesFilterDTO moviesFilterDTO = new MoviesFilterDTO(title, creationDate, genres, order);
-        List<MoviesModel> moviesModels = moviesRepository.findAll(movieSpecification.getByFilters(moviesFilterDTO));
+    public List<MoviesDTO>getByFilters(String title, Set<Long> genres, String order){
+        System.out.println(genres);
+        //System.out.println(order);
+        List<MoviesModel> moviesModels = moviesRepository.findAll(movieSpecification.getByFilters(title, genres, order));
         List<MoviesDTO>dtos=moviesMapper.movieModelSettoMovieDTOList(moviesModels);
         return dtos;
     }
@@ -50,7 +49,7 @@ public class MoviesServiceImpl implements MoviesService {
         moviesModel.setTitle(dto.getTitle());
         moviesModel.setImage(dto.getImage());
         moviesModel.setCreationDate(dto.getCreationDate());
-        moviesModel.setQuealification(dto.getQualification());
+        moviesModel.setQualification(dto.getQualification());
         moviesModel=moviesRepository.save(moviesModel);
         MoviesDTO results = moviesMapper.moviesModeltoDTO(moviesModel);
         return results;

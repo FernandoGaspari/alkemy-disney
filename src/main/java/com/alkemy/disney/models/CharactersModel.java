@@ -1,6 +1,6 @@
 package com.alkemy.disney.models;
 
-import com.fasterxml.jackson.annotation.JsonBackReference;
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import lombok.Getter;
 import lombok.Setter;
 
@@ -22,6 +22,7 @@ public class CharactersModel {
     private Short age;
     private Float weight;
     private String history;
-    @ManyToMany(mappedBy = "characters", cascade = CascadeType.ALL)
+    @ManyToMany(mappedBy = "characters", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
+    //@JsonIgnoreProperties({"characters"})
     private Set<MoviesModel> movies = new HashSet<MoviesModel>();
 }

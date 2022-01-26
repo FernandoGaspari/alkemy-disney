@@ -1,5 +1,6 @@
 package com.alkemy.disney.models;
 
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.fasterxml.jackson.annotation.JsonManagedReference;
 import lombok.Getter;
 import lombok.Setter;
@@ -22,21 +23,24 @@ public class MoviesModel {
     private String image;
     @Column(name = "creation_date")
     private Date creationDate;
-    private Short quealification;
-    @ManyToMany(cascade = {
+    private Short qualification;
+    @ManyToMany(fetch = FetchType.LAZY, cascade = {
             CascadeType.PERSIST,
             CascadeType.MERGE })
     @JoinTable(
             name = "character_movie",
             joinColumns = @JoinColumn(name = "movie_id"),
             inverseJoinColumns = @JoinColumn(name = "character_id"))
+    //@JsonIgnoreProperties({"movies"})
     Set<CharactersModel> characters = new HashSet<>();
-    @ManyToMany(cascade = {
+
+    @ManyToMany(fetch = FetchType.LAZY, cascade = {
             CascadeType.PERSIST,
-            CascadeType.MERGE })
+            CascadeType.MERGE})
     @JoinTable(
             name = "genre_movie",
             joinColumns = @JoinColumn(name = "movie_id"),
             inverseJoinColumns = @JoinColumn(name = "genre_id"))
+    //@JsonIgnoreProperties({"movies"})
     Set<GenresModel> genres = new HashSet<>();
 }
